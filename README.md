@@ -175,6 +175,7 @@ customer-churn-analysis-python/
 ├── Customer_Churn_Analysis.docx          # In-depth 17-section project report & methodology documentation
 ├── customer_churn_data.xlsx              # Multi-table relational source dataset (10,000 records)
 │
+├── data_architecture_pipeline.png        # Python Diagnostic Pipeline & Feature Engineering Model
 ├── churn_rate_by_plan_type.png           # Viz 1: Churn rate by subscription plan
 ├── churn_rate_by_tenure_group.png        # Viz 2: Churn rate across customer tenure cohorts
 ├── churn_rate_escalation_vs_no_escalation.png # Viz 3: Support escalation comparison
