@@ -63,19 +63,30 @@ Full correlation matrix between billing, tenure, complaints, CSAT scores, and ch
 
 The raw data originated from a 3-sheet normalized Excel workbook linked via `customerid`:
 
-```text
-customer_churn_data.xlsx
-│
-├── db_customer (10,000 rows × 8 cols)
-│   └── customerid, name, country, state, gender, dob, interests, pincode
-│
-├── db_subscription (10,000 rows × 11 cols)  ◄── [BASE TABLE]
-│   └── customerid, subscription_start_date, subscription_type, renewal_date, 
-│       plan_type, contract_type, cancellation_date, cancellation_reason, 
-│       monthly_charges, cltv, churn_score
-│
-└── db_support (4,647 rows × 6 cols)         ◄── [ONE-TO-MANY RELATIONSHIP]
-    └── customerid, complaint_date, escalations, csat_score, col_1, comment
+```mermaid
+flowchart TD
+    subgraph DataSources
+        C["db_customer - 10,000 Accounts (Demographics & Geography)"]
+        S["db_subscription - 10,000 Accounts (Billing, Tenure & Churn Flag)"]
+        SP["db_support - 4,647 Logs (Complaints, CSAT & Escalations)"]
+    end
+
+    subgraph Pipeline
+        P["Python EDA & Feature Engineering Pipeline"]
+        R["Tenure Cohort & Risk Tier Segmentation"]
+    end
+
+    subgraph Output
+        K["Key Finding: 27.27% Overall Churn Rate"]
+        T["Tipping Point: Tenure < 12 Months"]
+    end
+
+    C -->|"customerid"| P
+    S -->|"customerid"| P
+    SP -->|"customerid (1:N)"| P
+    P --> R
+    R --> K
+    R --> T
 ```
 
 ---
@@ -202,8 +213,6 @@ customer-churn-analysis-python/
 ## 👨‍💼 Author & Contact
 **Ravinder Gupta**  
 *Data Analyst | Business Intelligence & Analytics Specialist*  
-- 📍 **Location:** Alwar, Rajasthan, India  
+- 📍 **Location:** Gurugram (Delhi-NCR), India  
 - 📧 **Email:** [iamravindergupta17@gmail.com](mailto:iamravindergupta17@gmail.com)  
-- 💬 **WhatsApp:** [+91 9982637026](https://wa.me/919982637026?text=Hi%20Ravinder,%20saw%20your%20Customer%20Churn%20portfolio)
-- 💼 **LinkedIn:** [linkedin.com/in/ravinder-gupta-da](https://linkedin.com/in/ravinder-gupta-da)  
 - 🐙 **GitHub:** [github.com/ravinder0710](https://github.com/ravinder0710)
